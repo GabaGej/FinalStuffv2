@@ -18,12 +18,18 @@ public class ConvertorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Toast.makeText(this, "bbbbbb", 0).show();
+
+        // Debug toast
+        // Toast.makeText(this, "bbbbbb", 0).show();
+        setContentView(R.layout.activity_convertor);
         super.onCreate(savedInstanceState);
 
+        // This thing for whatever reason refuses to work
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Connect stuff
-        setContentView(R.layout.activity_convertor);
+
+        // Connect stuff from layout
+
         inputEditText = findViewById(R.id.vstupjedna);
         spinnerboa = findViewById(R.id.spinboa);
         spinnerosso = findViewById(R.id.spinnerosso);
@@ -36,11 +42,18 @@ public class ConvertorActivity extends AppCompatActivity {
         String inone = spinnerboa.getSelectedItem().toString();
         String intwo = spinnerosso.getSelectedItem().toString();
 
-        Toast.makeText(ConvertorActivity.this, inone,Toast.LENGTH_SHORT).show();
-        Toast.makeText(ConvertorActivity.this, intwo,Toast.LENGTH_SHORT).show();
-        // Find out the relationships
+        // Debug toasts
+        // Toast.makeText(ConvertorActivity.this, inone,Toast.LENGTH_SHORT).show();
+        // Toast.makeText(ConvertorActivity.this, intwo,Toast.LENGTH_SHORT).show();
+
+        // Add the two inputs into one and multiply by relations() result
+        // (that will get the number converted)
 
         double output = input * relations(inone, intwo);
+
+        // Define output based on results - if relations returns 0, it has failed
+        // (also can be caused because why define conversion to the ssame unit, right)
+
         String outtext;
         if(output == 0){
             outtext = "There is no defined relation for this conversion, or the output is equal to input.";
@@ -48,13 +61,21 @@ public class ConvertorActivity extends AppCompatActivity {
             outtext = output+" "+intwo;
         }
 
+        // Put it on display!
+
         vystup.setText(outtext);
 
     }
 
+
+    // Relation finder
     private double relations(String spinone, String spintwo){
+
+        // Set the opcode to be joined names of the units
         String opcode = spinone + spintwo;
         double result = 0;
+
+        // Find out what the relationship between two unit is
 
         switch (opcode){
             case "MetersKilometers":
@@ -149,8 +170,10 @@ public class ConvertorActivity extends AppCompatActivity {
                 break;
         }
 
-        Toast.makeText(ConvertorActivity.this, opcode,Toast.LENGTH_SHORT).show();
+        // Debug toast (returns opcode)
+        // Toast.makeText(ConvertorActivity.this, opcode,Toast.LENGTH_SHORT).show();
 
+        // Return the resulting relationship multiplier
         return (result);
     }
 

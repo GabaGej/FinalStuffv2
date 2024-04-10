@@ -1,5 +1,21 @@
 package net.leevanec.finalstuffv2;
 
+
+
+// --------------------------------------------------------------------------------------
+// This was written by ChatGPT 3.5 over the course of several days worth
+// of refinement. I have a general idea about how Stack stuff works, but
+// anything actually useful about it is something that I don't know.
+
+// I have no idea what this does, or how does it do it, but I know that if the
+// expression starts with a negative number it flips all the + and - operators
+// to the other ones, then computes the result, and after that it negates it.
+
+// Came up with that idea by myself!
+// --------------------------------------------------------------------------------------
+
+
+
 import java.util.Stack;
 
 public class ExpressionEvaluator {

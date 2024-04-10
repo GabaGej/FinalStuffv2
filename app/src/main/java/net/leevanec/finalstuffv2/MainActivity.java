@@ -27,34 +27,41 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // The usual startup stuff
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // Connect stuff from layout
         photoImageView = findViewById(R.id.photoImageView);
         takePhotoButton = findViewById(R.id.takePhotoButton);
-
         takePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent();
             }
         });
-
-
-
-
     }
 
+
+    // Go to calculator part
     public void launchCalculator(View view) {
         Intent intent = new Intent(this, CalculatorActivity.class);
         startActivity(intent);
     }
 
+    // Go to convertor part
     public void launchConvertor(View view) {
         Intent intent = new Intent(this, ConvertorActivity.class);
-        Toast.makeText(this, "aaaaaaaaaa", 0).show();
+
+        // Debug toast
+        // Toast.makeText(this, "aaaaaaaaaa", 0).show();
+
         startActivity(intent);
     }
+
+    // This whatever will fetch camera to get a picture
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -64,6 +71,7 @@ public class MainActivity extends Activity {
         }
     }
 
+    // This thing will display the thingy
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -76,6 +84,7 @@ public class MainActivity extends Activity {
         }
     }
 
+    // And this one will save the picture - for good measure
     private void saveImage(Bitmap imageBitmap) {
         File imagePath = new File(getFilesDir(), "images");
         if (!imagePath.exists()) {
