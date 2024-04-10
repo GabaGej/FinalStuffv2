@@ -35,14 +35,10 @@ public class ExpressionEvaluator {
                     negativeNumber = false; // Reset flag
                 }
                 operands.push(operand);
-            } else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+            } else if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^' || ch == '√') {
                 while (!operators.empty() && hasPrecedence(ch, operators.peek())) {
                     applyOperation(operands, operators.pop());
                 }
-                operators.push(ch);
-            } else if (ch == '√') {
-                operators.push(ch);
-            } else if (ch == '^') {
                 operators.push(ch);
             } else {
                 throw new IllegalArgumentException("Invalid character in expression: " + ch);
@@ -59,6 +55,9 @@ public class ExpressionEvaluator {
     private static void applyOperation(Stack<Double> operands, char operator) {
         if (operator == '√') {
             double operand = operands.pop();
+            if (operand < 0) {
+                throw new ArithmeticException("Square root of a negative number is undefined");
+            }
             operands.push(Math.sqrt(operand));
         } else {
             double operand2 = operands.pop();
@@ -74,6 +73,9 @@ public class ExpressionEvaluator {
                     operands.push(operand1 * operand2);
                     break;
                 case '/':
+                    if (operand2 == 0) {
+                        throw new ArithmeticException("Division by zero");
+                    }
                     operands.push(operand1 / operand2);
                     break;
                 case '^':
@@ -87,6 +89,12 @@ public class ExpressionEvaluator {
         if (op2 == '(' || op2 == ')') {
             return false;
         }
-        return (op1 != '+' && op1 != '-') || (op2 != '*' && op2 != '/');
+        if ((op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-')) {
+            return false;
+        }
+        if (op1 == '^' && (op2 == '*' || op2 == '/' || op2 == '+' || op2 == '-')) {
+            return false;
+        }
+        return true;
     }
 }

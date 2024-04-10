@@ -1,5 +1,7 @@
 package net.leevanec.finalstuffv2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,7 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CalculatorActivity extends AppCompatActivity {
 
@@ -26,6 +30,9 @@ public class CalculatorActivity extends AppCompatActivity {
 
         displayTextView = findViewById(R.id.displayTextView);
         numberHistory = new ArrayList<>();
+
+        // Load number history from SharedPreferences
+        loadNumberHistory();
 
         ListView historyListView = findViewById(R.id.historyListView);
         numberHistoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, numberHistory);
@@ -67,11 +74,11 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     }
 
-    // Function to save the displayed number into the list
+    // Function to save the displayed number into the list and SharedPreferences
     private void saveDisplayedNumber(double displayedNumber) {
         numberHistory.add(0, displayedNumber); // Add to the beginning of the list
-        // Update the adapter to reflect the change
-        numberHistoryAdapter.notifyDataSetChanged();
+        numberHistoryAdapter.notifyDataSetChanged(); // Update the adapter to reflect the change
+        saveNumberHistory(); // Save number history to SharedPreferences
     }
 
     // Function to move the last saved number back to the expression accumulator
@@ -82,6 +89,27 @@ public class CalculatorActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Number history is empty", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // Function to load number history from SharedPreferences
+    private void loadNumberHistory() {
+        SharedPreferences sharedPreferences = getSharedPreferences("NumberHistory", Context.MODE_PRIVATE);
+        Set<String> stringNumberHistory = sharedPreferences.getStringSet("history", new HashSet<>());
+        for (String numberString : stringNumberHistory) {
+            numberHistory.add(Double.parseDouble(numberString));
+        }
+    }
+
+    // Function to save number history to SharedPreferences
+    private void saveNumberHistory() {
+        Set<String> stringNumberHistory = new HashSet<>();
+        for (Double number : numberHistory) {
+            stringNumberHistory.add(String.valueOf(number));
+        }
+        SharedPreferences sharedPreferences = getSharedPreferences("NumberHistory", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet("history", stringNumberHistory);
+        editor.apply();
     }
 
     @Override

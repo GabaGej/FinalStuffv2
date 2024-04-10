@@ -25,7 +25,7 @@ public class ConvertorActivity extends AppCompatActivity {
         // Connect stuff
         setContentView(R.layout.activity_convertor);
         inputEditText = findViewById(R.id.vstupjedna);
-        spinnerboa = findViewById(R.id.spinnerosso);
+        spinnerboa = findViewById(R.id.spinboa);
         spinnerosso = findViewById(R.id.spinnerosso);
         vystup = findViewById(R.id.vystup);
     }
@@ -36,7 +36,8 @@ public class ConvertorActivity extends AppCompatActivity {
         String inone = spinnerboa.getSelectedItem().toString();
         String intwo = spinnerosso.getSelectedItem().toString();
 
-
+        Toast.makeText(ConvertorActivity.this, inone,Toast.LENGTH_SHORT).show();
+        Toast.makeText(ConvertorActivity.this, intwo,Toast.LENGTH_SHORT).show();
         // Find out the relationships
 
         double output = input * relations(inone, intwo);
@@ -44,10 +45,11 @@ public class ConvertorActivity extends AppCompatActivity {
         if(output == 0){
             outtext = "There is no defined relation for this conversion, or the output is equal to input.";
         }else{
-            outtext = output+"";
+            outtext = output+" "+intwo;
         }
 
         vystup.setText(outtext);
+
     }
 
     private double relations(String spinone, String spintwo){
@@ -146,6 +148,9 @@ public class ConvertorActivity extends AppCompatActivity {
                 result = 0;
                 break;
         }
+
+        Toast.makeText(ConvertorActivity.this, opcode,Toast.LENGTH_SHORT).show();
+
         return (result);
     }
 
