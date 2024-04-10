@@ -1,0 +1,73 @@
+<!-- activity_converter.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Input EditText for meters -->
+
+    <!-- Input EditText for feet -->
+
+    <!-- Convert button for meters to feet -->
+
+    <!-- Convert button for feet to meters -->
+
+    <!-- Output TextView -->
+
+    <EditText
+        android:id="@+id/vstupjedna"
+        android:layout_width="236dp"
+        android:layout_height="62dp"
+        android:hint="Enter meters"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/spinboa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/vystup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/submit"
+        android:text="Result will appear here"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submit"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="424dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerosso"
+        android:layout_width="269dp"
+        android:layout_height="46dp"
+        app:layout_constraintBottom_toTopOf="@+id/submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.906" />
+
+    <Spinner
+        android:id="@+id/spinboa"
+        android:layout_width="269dp"
+        android:layout_height="46dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerosso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.848" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

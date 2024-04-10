@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">FinalStuffv2</string>
+
+
+
+    <array name="spinboa">
+        <item>Meters</item>
+        <item>Kilometers</item>
+        <item>Miles</item>
+        <item>kmph</item>
+        <item>milph</item>
+        <item>mps</item>
+        <item>Grams</item>
+        <item>Kilograms</item>
+        <item>Pounds (weight)</item>
+        <item>Ounces</item>
+    </array>
+    <array name="spinnerosso">
+        <item>Meters</item>
+        <item>Kilometers</item>
+        <item>Miles</item>
+        <item>kmph</item>
+        <item>milph</item>
+        <item>mps</item>
+        <item>Grams</item>
+        <item>Kilograms</item>
+        <item>Pounds</item>
+        <item>Ounces</item>
+    </array>
+
+</resources>
